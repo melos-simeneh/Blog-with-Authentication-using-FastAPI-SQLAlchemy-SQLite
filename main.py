@@ -21,8 +21,9 @@ def get_db():
         db.close()
 
 @app.get('/api/blogs')
-def get_all_blogs():
-    return {"message":"Hello, world!"}
+def get_all_blogs(db:Session=Depends(get_db)):
+    blogs=db.query(model.Blog).all()
+    return blogs
 
 @app.post('/api/blogs')
 def create_blog(request:schema.Blog,db:Session=Depends(get_db)):
