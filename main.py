@@ -1,4 +1,4 @@
-from fastapi import FastAPI,Depends,status,HTTPException,Response
+from fastapi import FastAPI,Depends,status,HTTPException
 from sqlalchemy.orm import Session
 
 from models import models
@@ -34,10 +34,17 @@ def create_blog(request:schemas.Blog,db:Session=Depends(get_db)):
     return new_blog
 
 @app.get('/api/blogs/{id}',status_code=status.HTTP_200_OK)
-def get_blog(id,response:Response,db:Session=Depends(get_db)):
+def get_blog(id,db:Session=Depends(get_db)):
     blog=db.query(models.Blog).filter(models.Blog.id==id).first()
     if not blog:
-        # raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Blog not found")
-        response.status_code=status.HTTP_404_NOT_FOUND
-        return {"status":"fail","message":"Blog not found"}
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Blog not found")
     return blog
+
+@app.delete('/api/blogs/{id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_blog(id, db: Session = Depends(get_db)):
+    blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    if not blog:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Blog not found")
+    db.delete(blog)
+    db.commit()
+    return
