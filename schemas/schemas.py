@@ -8,3 +8,8 @@ class Blog(BaseModel):
 class BlogResponse(BaseModel):
     title:str
     body: str
+    
+class User(BaseModel):
+    name:str
+    username:str
+    password:str
