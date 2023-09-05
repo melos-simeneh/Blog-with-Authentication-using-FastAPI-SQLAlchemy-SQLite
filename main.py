@@ -70,3 +70,10 @@ def create_user(request:schemas.User, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+@app.get('/api/users/{id}', status_code=status.HTTP_200_OK,response_model=schemas.UserResponse)
+def get_user(id,db: Session=Depends(get_db)):
+    user=db.query(models.User).get(id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User not found")
+    return user
