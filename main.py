@@ -32,3 +32,8 @@ def create_blog(request:schema.Blog,db:Session=Depends(get_db)):
     db.commit()
     db.refresh(new_blog)
     return new_blog
+
+@app.get('/api/blogs/{id}')
+def get_blog(id,db:Session=Depends(get_db)):
+    blog=db.query(model.Blog).filter(model.Blog.id==id).first()
+    return blog
