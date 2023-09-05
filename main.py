@@ -77,3 +77,8 @@ def get_user(id,db: Session=Depends(get_db)):
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User not found")
     return user
+
+@app.get('/api/users', status_code=status.HTTP_200_OK)
+def get_all_users(db: Session=Depends(get_db)):
+    users=db.query(models.User).all()
+    return  users
