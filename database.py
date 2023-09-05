@@ -6,6 +6,6 @@ SQLALCHEMY_DATABASE_URL="sqlite:///./blog.db"
 
 engine=create_engine(SQLALCHEMY_DATABASE_URL,connect_args={"check_same_thread":False})
 
-SessionLocal=sessionmaker(autoflush=False,autocommit=False,bind=engine)
+SessionLocal=sessionmaker(bind=engine,autoflush=False,autocommit=False)
 
 Base=declarative_base()
