@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Depends,status,HTTPException
 from sqlalchemy.orm import Session
+from typing import List
 
 from models import models
 from schemas import schemas
@@ -20,7 +21,7 @@ def get_db():
     finally:
         db.close()
 
-@app.get('/api/blogs')
+@app.get('/api/blogs',status_code=status.HTTP_200_OK,response_model=List[schemas.BlogResponse])
 def get_all_blogs(db:Session=Depends(get_db)):
     blogs=db.query(models.Blog).all()
     return blogs
