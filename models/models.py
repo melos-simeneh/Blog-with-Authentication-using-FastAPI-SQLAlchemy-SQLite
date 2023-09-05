@@ -2,6 +2,7 @@ from sqlalchemy import Column,Integer,String
 from database import Base
 
 
+# This is database related
 class Blog(Base):
     __tablename__ = 'blogs'
     
