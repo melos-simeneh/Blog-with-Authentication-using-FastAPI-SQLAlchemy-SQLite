@@ -34,7 +34,7 @@ def create_blog(request:schemas.Blog,db:Session=Depends(get_db)):
     db.refresh(new_blog)
     return new_blog
 
-@app.get('/api/blogs/{id}',status_code=status.HTTP_200_OK)
+@app.get('/api/blogs/{id}',status_code=status.HTTP_200_OK,response_model=schemas.BlogResponse)
 def get_blog(id,db:Session=Depends(get_db)):
     blog=db.query(models.Blog).get(id)
     if not blog:
@@ -60,3 +60,11 @@ def delete_blog(id, db: Session = Depends(get_db)):
     db.delete(blog)
     db.commit()
     return
+
+@app.post('/api/users', status_code=status.HTTP_200_OK)
+def create_user(request:schemas.User, db: Session = Depends(get_db)):
+    new_user=models.User(name=request.name,username=request.username,password=request.password)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
