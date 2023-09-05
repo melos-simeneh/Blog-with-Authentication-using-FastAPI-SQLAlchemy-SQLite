@@ -1,6 +1,7 @@
 from fastapi import FastAPI,Depends,status,HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+from passlib.context import CryptContext
 
 from models import models
 from schemas import schemas
@@ -61,9 +62,12 @@ def delete_blog(id, db: Session = Depends(get_db)):
     db.commit()
     return
 
+pwd_cxt=CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 @app.post('/api/users', status_code=status.HTTP_200_OK)
 def create_user(request:schemas.User, db: Session = Depends(get_db)):
-    new_user=models.User(name=request.name,username=request.username,password=request.password)
+    hashed_password = pwd_cxt.hash(request.password)
+    new_user=models.User(name=request.name,username=request.username,password=hashed_password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
