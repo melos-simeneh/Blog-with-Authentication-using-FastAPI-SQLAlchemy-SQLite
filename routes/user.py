@@ -5,6 +5,7 @@ from schemas import schemas
 from database import get_db
 from typing import List
 from controllers import user
+from utils.oauth2 import get_current_user
 
 router=APIRouter(
     prefix="/api/users",
@@ -12,13 +13,13 @@ router=APIRouter(
 )
 
 @router.post('/', status_code=status.HTTP_200_OK,response_model=schemas.UserResponse)
-def create_user(request:schemas.User, db: Session = Depends(get_db)):
+def create_user(request:schemas.User, db: Session = Depends(get_db),current_user:schemas.User=Depends(get_current_user)):
     return user.create_user(request,db)
 
 @router.get('/{id}', status_code=status.HTTP_200_OK,response_model=schemas.UserResponse)
-def get_user(id:int,db: Session=Depends(get_db)):
+def get_user(id:int,db: Session=Depends(get_db),current_user:schemas.User=Depends(get_current_user)):
     return user.get_user(id,db)
 
 @router.get('/', status_code=status.HTTP_200_OK,response_model=List[schemas.UserResponse])
-def get_all_users(db: Session=Depends(get_db)):
+def get_all_users(db: Session=Depends(get_db),current_user:schemas.User=Depends(get_current_user)):
     return  user.get_all_users(db)
