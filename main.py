@@ -27,9 +27,9 @@ def get_all_blogs(db:Session=Depends(get_db)):
     blogs=db.query(models.Blog).all()
     return blogs
 
-@app.post('/api/blogs',status_code=status.HTTP_201_CREATED,tags=["Blogs"])
+@app.post('/api/blogs',status_code=status.HTTP_201_CREATED,tags=["Blogs"],response_model=schemas.BlogResponse)
 def create_blog(request:schemas.Blog,db:Session=Depends(get_db)):
-    new_blog=models.Blog(title=request.title,body=request.body)
+    new_blog=models.Blog(title=request.title,body=request.body,user_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -42,7 +42,7 @@ def get_blog(id,db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Blog not found")
     return blog
 
-@app.put('/api/blogs/{id}',status_code=status.HTTP_202_ACCEPTED,tags=["Blogs"])
+@app.put('/api/blogs/{id}',status_code=status.HTTP_202_ACCEPTED,tags=["Blogs"],response_model=schemas.BlogResponse)
 def update_blog(id,request: schemas.Blog,db:Session=Depends(get_db)):
     blog=db.query(models.Blog).get(id)
     if not blog:
@@ -78,7 +78,7 @@ def get_user(id,db: Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User not found")
     return user
 
-@app.get('/api/users', status_code=status.HTTP_200_OK,response_model=schemas.UserResponse,tags=["Users"])
+@app.get('/api/users', status_code=status.HTTP_200_OK,response_model=List[schemas.UserResponse],tags=["Users"])
 def get_all_users(db: Session=Depends(get_db)):
     users=db.query(models.User).all()
     return  users
