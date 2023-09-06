@@ -27,6 +27,9 @@ class BlogResponse(BaseModel):
     body: str
     creator: Optional[UserResponseWithoutBlogs] = None
 
-    
+
+class Login(BaseModel):
+    username:str
+    password:str
 
     
