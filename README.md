@@ -1,1 +1,1 @@
-# Blog using FastAPI,SQLAlchemy and SQLite
+# Blog with Authentication using FastAPI,SQLAlchemy and SQLite
