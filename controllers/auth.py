@@ -2,8 +2,8 @@ from fastapi import status,HTTPException
 from sqlalchemy.orm import Session
 from models import models
 from schemas import schemas
-from utils.bcrypt import Hash
-from utils.jwt import create_access_toekn
+from utils.password import Hash
+from utils.token import create_access_toekn
 
 def login(request: schemas.Login,db: Session):
     user=db.query(models.User).filter(models.User.username==request.username).first()
