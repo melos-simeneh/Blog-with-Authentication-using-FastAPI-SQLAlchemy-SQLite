@@ -1,1 +1,1 @@
-# Blog using FastAPI,SQLAlchemy and MySQL
+# Blog using FastAPI,SQLAlchemy and SQLite
