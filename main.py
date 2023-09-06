@@ -1,11 +1,7 @@
-from fastapi import FastAPI,Depends,status,HTTPException
-from sqlalchemy.orm import Session
-from typing import List
-
+from fastapi import FastAPI
 from models import models
-from schemas import schemas
-from database import engine,SessionLocal
-from utils import Hash
+from database import engine
+
 from routes import blog, user,auth
 
 app=FastAPI(

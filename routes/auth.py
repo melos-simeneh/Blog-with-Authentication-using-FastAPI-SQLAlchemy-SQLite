@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from schemas import schemas
 from database import get_db
 from typing import List
-from controllers import blog
+from controllers import auth
 
 
 router=APIRouter(
@@ -16,4 +16,4 @@ router=APIRouter(
 
 @router.post('/login')
 def login(request: schemas.Login,db: Session=Depends(get_db)):
-    return
+    return auth.login(request,db)
