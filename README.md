@@ -8,4 +8,10 @@ To install dependecies run the this command
 ```
 $ pip install -r requirements.txt
 ```
+## Run server
+```
+$ uvicorn main:app --reload
+```
+This will start the app on http://127.0.0.1:8000 \
+Swagger doc http://127.0.0.1:8000
 
