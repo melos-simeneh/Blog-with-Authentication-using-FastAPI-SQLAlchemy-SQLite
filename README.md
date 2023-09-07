@@ -14,4 +14,5 @@ $ uvicorn main:app --reload
 ```
 This will start the app on http://127.0.0.1:8000 \
 Swagger doc http://127.0.0.1:8000
-
+## Thank You
+Thank you for taking the time to explore the Todo app. I hope it provides you with valuable information.
