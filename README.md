@@ -1,4 +1,5 @@
 ## 📔🔐	Blog with Authentication using FastAPI,SQLAlchemy and SQLite
+This app allows users to create ,edit,read and delete blogas.
 ## Prerequisites
 1. Python installed
 2. python basics
