@@ -2,7 +2,7 @@
 This app allows users to create ,edit,read and delete blogs.The user must signin to perform the crud operations.The app is implemented in python using FastAPI framework
 ## Prerequisites
 1. Python installed
-2. python basics
+2. Python basics
 3. FastAPI basics
 ## Install Dependencies
 To install dependecies run the this command
