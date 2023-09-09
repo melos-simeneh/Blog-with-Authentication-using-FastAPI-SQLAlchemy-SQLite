@@ -1,5 +1,6 @@
 ## 📔🔐	Blog with Authentication using FastAPI,SQLAlchemy and SQLite
 This app allows users to create ,edit,read and delete blogs.The user must signin to perform the crud operations.The app is implemented in python using FastAPI framework
+![demo](./screenshot.PNG)
 ## Prerequisites
 1. Python installed
 2. Python basics
