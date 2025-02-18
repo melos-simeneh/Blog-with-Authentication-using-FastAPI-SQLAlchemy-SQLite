@@ -21,7 +21,7 @@ def get_all_blogs(db:Session=Depends(get_db),current_user:schemas.User=Depends(g
 
 @router.post('/',status_code=status.HTTP_201_CREATED,response_model=schemas.BlogResponse)
 def create_blog(request:schemas.Blog,db:Session=Depends(get_db),current_user:schemas.User=Depends(get_current_user)):
-    return blog.create_blog(request, db)
+    return blog.create_blog(request, db,current_user)
 
 @router.get('/{id}',status_code=status.HTTP_200_OK,response_model=schemas.BlogResponse)
 def get_blog(id,db:Session=Depends(get_db),current_user:schemas.User=Depends(get_current_user)):

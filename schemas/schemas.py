@@ -22,7 +22,6 @@ class UserResponseWithoutBlogs(BaseModel):
     name: str
     username: str
 class BlogResponse(BaseModel):
-    # id:int
     title:str
     body: str
     creator: Optional[UserResponseWithoutBlogs] = None
@@ -38,5 +37,6 @@ class Token(BaseModel):
     token_type:str
 
 class TokenData(BaseModel):
-    username:Optional[str]=None
+    username: str
+    user_id: int
     
