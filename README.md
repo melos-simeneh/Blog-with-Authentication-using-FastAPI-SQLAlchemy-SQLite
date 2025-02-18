@@ -75,7 +75,15 @@ Install the required dependencies using the **requirements.txt** file:
 pip install -r requirements.txt
 ```
 
-### 4. Run the Application
+### 4. Login with Default User
+
+To quickly test the application, use the pre-created default user:
+
+Username: melos
+Password: 1234
+You can log in with these credentials via the login endpoint on Swagger UI or using any API client.
+
+### 5. Run the Application
 
 Start the FastAPI server using Uvicorn:
 
